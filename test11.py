@@ -1,0 +1,22 @@
+import tensorflow as tf
+x=tf.constant([64.3,99.6,145.45,63.75,135.46,92.85,86.97,144.76,59.3,116.03])
+y=tf.constant([62.55,82.42,132.62,73.31,131.05,86.57,85.49,127.44,55.25,104.84])
+xy=tf.multiply(x,y)
+xy_sum=tf.reduce_sum(xy)#xi与yi的和
+x_sum=tf.reduce_sum(x)
+y_sum=tf.reduce_sum(y)
+x_sumy_sum=tf.multiply(x_sum,y_sum)#xi的和加yi的和的乘积
+s1=tf.subtract(xy_sum,x_sumy_sum)#-----分子
+x2=tf.pow(x,2)
+x2_sum=tf.reduce_sum(x2)#x的平方和
+x2_sum1=tf.pow(x_sum,2)
+s2=tf.subtract(x2_sum,x2_sum1)#------分母
+w=tf.divide(s1,s2)
+print("w的值为")
+print(w.numpy())
+wxi=tf.multiply(w,x_sum)
+s3=tf.subtract(y_sum,wxi)#求b时的分母
+n=x.numpy().size
+b=tf.divide(s3,n)
+print("b的值为")
+print(b.numpy())
